@@ -65,6 +65,6 @@ Se necesita modelar los personajes de un juego y para ello se dispone de la sigu
 
 ## Ejercicio 4
 
-Subir todo lo desarrollado al repositorio en Github y enviar el link por mail a facundo.kamikaze@gmail.com
+Subir todo lo desarrollado al repositorio en Github y enviar el link por mail a *****.
 
 *Nota: no es necesario crear un proyecto nuevo.*
