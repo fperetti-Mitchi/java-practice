@@ -1,8 +1,9 @@
-
 /* Esta es una clase base abstracta que representa un personaje genérico.
 *  Contiene un método que se implementa en cada tipo de personaje,
 *  mostrando los conceptos de herencia, encapsulamiento y polimorfismo.
 */
+
+import java.util.Scanner;
 
 public abstract class Personaje {
     int salud;
@@ -12,7 +13,7 @@ public abstract class Personaje {
     public static void main(String[] args) {
 
         // Espadachín: tiene ataque, y el entrenamiento le sube 10 pts.
-        Personaje espadachin = new Personaje() {
+        var espadachin = new Personaje() {
             int ataque;
 
             public int getAtaque() {
@@ -25,13 +26,14 @@ public abstract class Personaje {
 
             @Override
             public int entrenar(int ataque) {
-                this.ataque = ataque + 10;
-                return this.ataque;
+                ataque = getAtaque();
+                setAtaque(ataque + 10);
+                return ataque;
             }
         };
 
         // Torre: tiene nivel y al entrenar sube 1 punto
-        Personaje torre = new Personaje() {
+        var torre = new Personaje() {
             int nivel;
 
             public int getNivel() {
@@ -44,8 +46,9 @@ public abstract class Personaje {
 
             @Override
             public int entrenar(int nivel) {
-                this.nivel = nivel + 1;
-                return this.nivel;
+                nivel = getNivel();
+                setNivel(nivel + 1);
+                return nivel;
             }
         };
 
@@ -63,10 +66,49 @@ public abstract class Personaje {
 
             @Override
             public int entrenar(int habilidad) {
-                System.out.println("Los magos no entrenan porque son vagos.\n");
                 return 0;
             }
         };
 
+        // Pruebo las habilidades
+        System.out.println("\nBienvenidx a la sala de entrenamiento!");
+
+        char resp = 's';
+        try {
+            while (resp == 's') {
+                System.out.println("Seleccioná un personaje.");
+                Scanner s1 = new Scanner(System.in);
+                System.out.println("1. Espadachín\n2. Torre\n3. Mago\n");
+                int opcion = s1.nextInt();
+
+                // Usuario ingresa un número para el personaje eligió
+                // En base a eso, se ejecuta el método correspondiente al mismo
+                switch (opcion) {
+                    case 1:
+                        espadachin.entrenar(0);
+                        System.out.println(
+                                "Genial! Tu espadachín ahora tiene " + espadachin.getAtaque() + " de ataque!\n");
+                        break;
+                    case 2:
+                        torre.entrenar(0);
+                        System.out.println("Genial! Tu torre ahora es nivel " + torre.getNivel() + "\n");
+                        break;
+                    case 3:
+                        mago.entrenar(0);
+                        System.out.println("Los magos no entrenan porque son vagos :D\n");
+                        break;
+                    default:
+                        System.err.println("Opción no válida.\n");
+                        break;
+                }
+
+                System.out.println("Querés continuar? (S/N)\n");
+                Scanner s2 = new Scanner(System.in);
+                resp = s2.next().toLowerCase().charAt(0);
+            }
+            // Excepción
+        } catch (Exception e) {
+            System.err.println("Nah, lo rompiste.\n");
+        }
     }
 }
